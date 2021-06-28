@@ -7,7 +7,6 @@ logging:
     org:
       hibernate:
         SQL_SLOW: info
-        stat: debug
 
 spring:
   datasource:
