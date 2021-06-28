@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL_SLOW: info
+        stat: debug
+
+spring:
+  datasource:
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 60000
+      maximum-pool-size: 5
+      max-lifetime: 60000
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:${DBMS:postgresql}://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}?stringtype=unspecified
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: 100
+        default_schema: ${DB_SCHEMA:public}
+    open-in-view: false
